@@ -9,6 +9,8 @@ from Tools import KEY_PRESSED
 from Algorithms import InsertionSort, CocktailShakerSort, BubbleSort
 from Visualization import VisualizedArray
 
+CleanCMD = lambda: os.system('cls') # Clean CMD.
+
 def INITIALIZE_SCREEN():
     global SCREENSIZE, FONT
     FLAGS = FULLSCREEN | DOUBLEBUF  # Fullscreen mode.
@@ -23,7 +25,7 @@ def INITIALIZE_SCREEN():
     pygame.mouse.set_visible(False) # Hidding the mouse.
     FONT = pygame.font.Font('./Font.ttf', 25)
     return WIN, True
-
+CleanCMD()
 Algorithms = ['Insertion Sort', 'Cocktail Shacker Sort', 'Bubble Sort']
 for i in range(len(Algorithms)):
     print(f'{i+1}.{Algorithms[i]}')
@@ -38,20 +40,18 @@ while inputLoop:
             inputLoop = False
         else:
             print(f"Algorithm Number {UserInput} isn't valid, number should be between 1-3.\n")
-print('\n')
 
 sizeLoop = True
 while sizeLoop:
     try:
         ArraySize = int(input('Array Size: '))
     except:
-        print(f"Array Size {UserInput} isn't valid, it has to be a number between 1-1000.\n")
+        print(f"Array Size isn't valid, it has to be a number between 1-1000.\n")
     else:
         if ArraySize >= 1 and ArraySize <= 1000:
             sizeLoop = False
         else:
-            print(f"Array Size {UserInput} isn't valid, number should be between 1-1000.\n")
-print('\n')
+            print(f"Array Size {ArraySize} isn't valid, number should be between 1-1000.\n")
 
 WIN, MAIN_LOOP = INITIALIZE_SCREEN()
 Array = [i+1 for i in range(ArraySize)]

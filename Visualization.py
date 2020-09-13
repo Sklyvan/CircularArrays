@@ -9,7 +9,7 @@ class VisualizedArray:
         self.array, maxArray = array, max(array)
         self.normalizedArray = [i/maxArray for i in self.array] # Array with values inside the range (0, 1].
         self.maxRadius = screenSize[1]//2 # The biggest circle is going to have this radius, half of screen y-size.
-        self.circleThickness = 4
+        self.circleThickness = 1
         self.colourSteps = ceil(RGB_SIZE/len(self.array)) # Depending on the size of the array we acces to the RGB colours with more or less steps.
         self.circleCenter = (screenSize[0]//2, screenSize[1]//2) # The circles are originated on the center of the screen.
 
