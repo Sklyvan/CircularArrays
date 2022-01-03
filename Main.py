@@ -1,31 +1,22 @@
-import os
 import sys
-import ctypes
 import pygame
-import time
 from random import shuffle
 from pygame.locals import *
 from Tools import KEY_PRESSED
 from Algorithms import InsertionSort, CocktailShakerSort, BubbleSort
 from Visualization import VisualizedArray
 
-CleanCMD = lambda: os.system('cls') # Clean CMD.
-
 def INITIALIZE_SCREEN():
-    global SCREENSIZE, FONT
-    FLAGS = FULLSCREEN | DOUBLEBUF  # Fullscreen mode.
-    user32 = ctypes.windll.user32
-    SCREENSIZE = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
-    WIN_SIZE = (SCREENSIZE[0], SCREENSIZE[1])  # Screen resolution depending on the screen size.
+    WIN_SIZE = (1920, 1080)  # Screen resolution depending on the screen size.
     pygame.init()  # Starting PyGame library.
-    WIN = pygame.display.set_mode(WIN_SIZE, FULLSCREEN)  # Creating screen in fullscreen mode.
+    WIN = pygame.display.set_mode(WIN_SIZE)  # Creating screen in fullscreen mode.
     WIN.set_alpha(None)  # Disabling alpha, since we don't use images so that improves the perfomance.
     pygame.event.set_allowed([QUIT, KEYDOWN])  # Adding the two only allowed keys, for better perfomance.
     pygame.display.set_caption('Array Circular Visualizer')
     pygame.mouse.set_visible(False) # Hidding the mouse.
     FONT = pygame.font.Font('./Font.ttf', 25)
-    return WIN, True
-CleanCMD()
+    return WIN, True, WIN_SIZE, FONT
+
 Algorithms = ['Insertion Sort', 'Cocktail Shacker Sort', 'Bubble Sort']
 for i in range(len(Algorithms)):
     print(f'{i+1}.{Algorithms[i]}')
@@ -53,7 +44,7 @@ while sizeLoop:
         else:
             print(f"Array Size {ArraySize} isn't valid, number should be between 1-1000.\n")
 
-WIN, MAIN_LOOP = INITIALIZE_SCREEN()
+WIN, MAIN_LOOP, SCREENSIZE, FONT = INITIALIZE_SCREEN()
 Array = [i+1 for i in range(ArraySize)]
 shuffle(Array)
 Iterations = 0
